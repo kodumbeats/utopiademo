@@ -21,8 +21,9 @@ App::get('/hello')
         function($request, $response) {
             $response
                 ->addHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
-                ->addHeader('Expires', '0')
+                ->addHeader('Expires', '-1')
                 ->addHeader('Pragma', 'no-cache')
+                ->addHeader('X-XSS-Protection', '1;mode=block')
                 ->json(['Hello' => 'World']);
         }
     );
@@ -34,8 +35,9 @@ App::get('/goodbye')
         function($request, $response) {
             $response
                 ->addHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
-                ->addHeader('Expires', '0')
+                ->addHeader('Expires', '-1')
                 ->addHeader('Pragma', 'no-cache')
+                ->addHeader('X-XSS-Protection', '1;mode=block')
                 ->json(['Goodbye' => 'World']);
         }
     );

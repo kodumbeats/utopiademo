@@ -14,6 +14,24 @@ use Swoole\Http\Response as SwooleResponse;
 
 $http = new Server("0.0.0.0", 8080);
 
+Files::load(__DIR__ . '/../public'); // Static files location
+
+App::get('/')
+    ->groups(['home'])
+    ->label('scope', 'home')
+    ->inject('request')
+    ->inject('response')
+    ->action(
+        function($request, $response) {
+          $response
+              ->addHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
+              ->addHeader('Expires', '-1')
+              ->addHeader('Pragma', 'no-cache')
+              ->addHeader('X-XSS-Protection', '1;mode=block')
+              ->send(Files::getFileContents('/index.html'));
+        }
+    );
+
 App::get('/hello')
     ->inject('request')
     ->inject('response')

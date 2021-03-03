@@ -33,6 +33,7 @@ App::get('/')
     );
 
 App::get('/hello')
+    ->groups(['api'])
     ->inject('request')
     ->inject('response')
     ->action(
@@ -47,6 +48,7 @@ App::get('/hello')
     );
 
 App::get('/goodbye')
+    ->groups(['api'])
     ->inject('request')
     ->inject('response')
     ->action(

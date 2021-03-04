@@ -17,6 +17,22 @@ $http = new Server("0.0.0.0", 8080);
 
 Files::load(__DIR__ . '/../public'); // Static files location
 
+/*
+    The init and shutdown methods take three params:
+    1. Callback function
+    2. Array of resources required by the callback 
+    3. The endpoint group for which the callback is intended to run
+
+    In the following, the init method is called on all groups with 
+    the wildcard permission '*', modifying the $response object
+    for each route.
+
+    The shutdown method uses the Utopia CLI lib to log api to the console;
+    this is done for routes in the 'api' group. These logs will appear 
+    in docker logs. 
+    
+*/
+
 App::init(function($response) {
     $response
         ->addHeader('Cache-control', 'no-cache, no-store, must-revalidate')
@@ -30,12 +46,19 @@ App::shutdown(function($request) {
     Console::success($date->format('c').' '.$request->getURI());
 }, ['request'], 'api');
 
+/*
+    The routes are defined before the Swoole server is turned on.
+    Resources are modified in the routes via the inject method,
+    which is an alternate syntax to the middleware methods above. 
+*/
+
 App::get('/')
     ->groups(['home'])
     ->inject('request')
     ->inject('response')
     ->action(
         function($request, $response) {
+            // Return a static file
             $response->send(Files::getFileContents('/index.html'));
         }
     );
@@ -59,6 +82,10 @@ App::get('/goodbye')
             $response->json(['Goodbye' => 'World']);
         }
     );
+
+/*
+    Configure the Swoole server to respond with the Utopia app.    
+*/
 
 $http->on('request', function (SwooleRequest $swooleRequest, SwooleResponse $swooleResponse) {
 

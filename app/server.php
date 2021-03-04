@@ -17,6 +17,11 @@ $http = new Server("0.0.0.0", 8080);
 
 Files::load(__DIR__ . '/../public'); // Static files location
 
+App::shutdown(function($request) {
+    $date = new DateTime();
+    Console::success($date->format('c').' '.$request->getURI());
+}, ['request'], '*');
+
 App::get('/')
     ->groups(['home'])
     ->label('scope', 'home')

@@ -78,6 +78,7 @@ $http->on('request', function (SwooleRequest $swooleRequest, SwooleResponse $swo
     try {
         $app->run($request, $response);
     } catch (\Throwable $th) {
+        Console::error('There\'s a problem with '.$request->getURI());
         $swooleResponse->end('500: Server Error');
     }
 });

@@ -17,6 +17,14 @@ $http = new Server("0.0.0.0", 8080);
 
 Files::load(__DIR__ . '/../public'); // Static files location
 
+App::init(function($response) {
+    $response
+        ->addHeader('Cache-control', 'no-cache, no-store, must-revalidate')
+        ->addHeader('Expires', '-1')
+        ->addHeader('Pragma', 'no-cache')
+        ->addHeader('X-XSS-Protection', '1;mode=block');
+}, ['response'], '*');
+
 App::shutdown(function($request) {
     $date = new DateTime();
     Console::success($date->format('c').' '.$request->getURI());
@@ -29,12 +37,7 @@ App::get('/')
     ->inject('response')
     ->action(
         function($request, $response) {
-          $response
-              ->addHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
-              ->addHeader('Expires', '-1')
-              ->addHeader('Pragma', 'no-cache')
-              ->addHeader('X-XSS-Protection', '1;mode=block')
-              ->send(Files::getFileContents('/index.html'));
+            $response->send(Files::getFileContents('/index.html'));
         }
     );
 
@@ -44,12 +47,7 @@ App::get('/hello')
     ->inject('response')
     ->action(
         function($request, $response) {
-            $response
-                ->addHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
-                ->addHeader('Expires', '-1')
-                ->addHeader('Pragma', 'no-cache')
-                ->addHeader('X-XSS-Protection', '1;mode=block')
-                ->json(['Hello' => 'World']);
+            $response->json(['Hello' => 'World']);
         }
     );
 
@@ -59,22 +57,16 @@ App::get('/goodbye')
     ->inject('response')
     ->action(
         function($request, $response) {
-            $response
-                ->addHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
-                ->addHeader('Expires', '-1')
-                ->addHeader('Pragma', 'no-cache')
-                ->addHeader('X-XSS-Protection', '1;mode=block')
-                ->json(['Goodbye' => 'World']);
+            $response->json(['Goodbye' => 'World']);
         }
     );
-
 
 $http->on('request', function (SwooleRequest $swooleRequest, SwooleResponse $swooleResponse) {
 
     $request = new Request($swooleRequest);
     $response = new Response($swooleResponse);
     $app = new App('America/Toronto');
-    
+
     try {
         $app->run($request, $response);
     } catch (\Throwable $th) {

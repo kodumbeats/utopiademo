@@ -28,7 +28,7 @@ App::init(function($response) {
 App::shutdown(function($request) {
     $date = new DateTime();
     Console::success($date->format('c').' '.$request->getURI());
-}, ['request'], '*');
+}, ['request'], 'api');
 
 App::get('/')
     ->groups(['home'])

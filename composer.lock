@@ -4,8 +4,62 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa4936da3461f29a011752f3f3b6cd2f",
+    "content-hash": "bdaac2c6cd05b89b310b51d44942be54",
     "packages": [
+        {
+            "name": "utopia-php/cli",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/utopia-php/cli.git",
+                "reference": "69ae40187fb4b68ef14f0224a68d9cc016b83634"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/utopia-php/cli/zipball/69ae40187fb4b68ef14f0224a68d9cc016b83634",
+                "reference": "69ae40187fb4b68ef14f0224a68d9cc016b83634",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "utopia-php/framework": "0.*.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3",
+                "vimeo/psalm": "4.0.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Utopia\\CLI\\": "src/CLI"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eldad Fux",
+                    "email": "eldad@appwrite.io"
+                }
+            ],
+            "description": "A simple CLI library to manage command line applications",
+            "keywords": [
+                "cli",
+                "command line",
+                "framework",
+                "php",
+                "upf",
+                "utopia"
+            ],
+            "support": {
+                "issues": "https://github.com/utopia-php/cli/issues",
+                "source": "https://github.com/utopia-php/cli/tree/0.10.0"
+            },
+            "time": "2021-01-26T16:35:15+00:00"
+        },
         {
             "name": "utopia-php/framework",
             "version": "0.10.1",
@@ -117,7 +171,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "utopia-php/swoole": 20
+        "utopia-php/swoole": 20,
+        "utopia-php/cli": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

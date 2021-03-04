@@ -8,6 +8,7 @@ use Utopia\App;
 use Utopia\Swoole\Request;
 use Utopia\Swoole\Response;
 use Utopia\Swoole\Files;
+use Utopia\CLI\Console;
 use Swoole\Http\Server;
 use Swoole\Http\Request as SwooleRequest;
 use Swoole\Http\Response as SwooleResponse;

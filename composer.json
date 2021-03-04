@@ -11,6 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "utopia-php/swoole": "dev-master"
+        "utopia-php/swoole": "dev-master",
+        "utopia-php/cli": "dev-master"
     }
 }

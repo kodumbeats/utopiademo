@@ -32,7 +32,6 @@ App::shutdown(function($request) {
 
 App::get('/')
     ->groups(['home'])
-    ->label('scope', 'home')
     ->inject('request')
     ->inject('response')
     ->action(

@@ -15,6 +15,9 @@ The docker-compose config will mount the root folder to `/app` in the container,
 
   `docker-compose restart`
 
+## Request Flow
+[Request Flow](images/requests.drawio.svg)
+
 ## Resources
 
 - [utopia-php/framework](https://github.com/utopia-php/framework)
